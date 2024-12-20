@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -28,10 +30,10 @@ public class PetStore {
         joinColumns = @JoinColumn(name = "pet_store_id"),
         inverseJoinColumns = @JoinColumn(name = "customer_id")
     )
-    private Set<Customer> customers;
+    private Set<Customer> customers = new HashSet<Customer>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @OneToMany(mappedBy = "petStore", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Employee> employees;
+    private Set<Employee> employees = new HashSet<Employee>();
 }
